@@ -465,9 +465,9 @@ class Game extends React.Component {
                     {this.state.gameStatus} */}
                     {/* {if (this.game.gameStatus === 'checkmate') } */}
                 </div>
-                <button onClick={
+                {/* <button onClick={
                     () => this.setState({gameOver: false})
-                }>X</button>
+                }>X</button> */}
             </div>
         );
     }

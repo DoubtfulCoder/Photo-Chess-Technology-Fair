@@ -1,0 +1,165 @@
+.main {
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 38px;
+}
+
+.board {
+    width: 304px;
+    height: 304px;
+    border: 1px solid black;
+    margin-right: 20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    /* width: 240px */
+}
+
+.row:nth-child(even) .square:nth-child(even) {
+    background-color: white;
+}
+
+.row:nth-child(even) .square:nth-child(odd) {
+    background-color: rgb(49, 58, 190);
+}
+
+.row:nth-child(odd) .square:nth-child(even) {
+    background-color: rgb(49, 58, 190);
+}
+
+.row:nth-child(odd) .square:nth-child(odd) {
+    background-color: white;
+}
+
+.square {
+    width: 38px;
+    height: 38px;
+}
+
+/* Change to piece-clicked */
+.piece-clicked {
+    width: 38px;
+    height: 38px;
+    background-color: green;
+}
+
+.piece-pot-moves {
+    background-color: greenyellow;
+}
+
+.move-history {
+    width: 150px;
+    height: 400px;
+    background-color: white;
+    overflow: auto;
+
+}
+
+.history-title {
+    margin-bottom: 5px;
+}
+
+.white-move::before {
+    content: "1.";
+}
+
+.black-move {
+
+}
+
+#start-button {
+    width: 105px;
+}
+
+.move-button {
+   background-color: rgba(51, 51, 51, 0.05); 
+   margin: 2px;
+   border-radius: 7px;
+   border-color: white;
+   display: inline-block;
+   width: 50px;
+   cursor: pointer;
+   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   text-align: center;
+   font-size: 14px;
+   padding: 5px;
+}
+
+.move-button:hover {
+    background-color: blue; 
+    color: white;
+}
+
+/* Promotion classes */
+.promotion {
+    background-color: red;
+    width: 61px;
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.black-promote {
+    flex-direction: column-reverse;
+    top: 420;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.game-status {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 240px;
+    height: 241px;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    background-color: green;
+    position: absolute;
+    left: 121px;
+    top: 120px;
+}
+
+/* CSS */
+/* .button-2 {
+  background-color: rgba(51, 51, 51, 0.05);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+} */

@@ -44,6 +44,10 @@
         "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/drawable_old.jpg.flat",
+        "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/drawable/old.jpg"
+    },
+    {
         "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/drawable_ic_camera.xml.flat",
         "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/drawable/ic_camera.xml"
     },

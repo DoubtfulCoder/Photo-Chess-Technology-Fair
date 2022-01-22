@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Object Detection Codelab</string>
+    <string name="app_name">Photo Chess</string>
     <string name="tv_take_photo">Take photo</string>
-    <string name="tv_description">Select a preset image or take a new photo</string>
-    <string name="tv_placeholder">Object detection demo</string>
+    <string name="tv_description">Select a sample image or take a new photo</string>
+    <string name="tv_placeholder">Photo chess</string>
+    <string name="hello">Hello!!</string>
 </resources>

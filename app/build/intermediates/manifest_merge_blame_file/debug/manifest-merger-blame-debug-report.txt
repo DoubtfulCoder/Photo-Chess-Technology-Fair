@@ -10,71 +10,75 @@
 9        android:targetSdkVersion="30" />
 9-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml
 10
-11    <queries>
-11-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:5:5-9:15
-12        <intent>
-12-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:6:9-8:18
-13            <action android:name="android.media.action.IMAGE_CAPTURE" />
-13-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:7:13-73
-13-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:7:21-70
-14        </intent>
-15    </queries>
-16
-17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-18    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-19    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-20
-21    <application
-21-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:11:5-35:19
-22        android:allowBackup="true"
-22-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:12:9-35
-23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-23-->[androidx.core:core:1.3.2] /home/naveed/.gradle/caches/transforms-2/files-2.1/f4726924add2327517ec5f23b6aa3aba/core-1.3.2/AndroidManifest.xml:24:18-86
-24        android:debuggable="true"
-25        android:extractNativeLibs="false"
-26        android:icon="@mipmap/ic_launcher"
-26-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:13:9-43
-27        android:label="@string/app_name"
-27-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:14:9-41
-28        android:roundIcon="@mipmap/ic_launcher_round"
-28-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:15:9-54
-29        android:supportsRtl="true"
-29-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:16:9-35
-30        android:testOnly="true"
-31        android:theme="@style/Theme.ObjectDetection" >
-31-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:17:9-53
-32        <activity android:name="org.tensorflow.codelabs.objectdetection.MainActivity" >
-32-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:18:9-24:20
-32-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:18:19-86
-33            <intent-filter>
-33-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:19:13-23:29
-34                <action android:name="android.intent.action.MAIN" />
-34-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:20:17-69
-34-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:20:25-66
-35
-36                <category android:name="android.intent.category.LAUNCHER" />
-36-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:22:17-77
-36-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:22:27-74
-37            </intent-filter>
-38        </activity>
-39
-40        <provider
-40-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:26:9-34:20
-41            android:name="androidx.core.content.FileProvider"
-41-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:27:13-62
-42            android:authorities="org.tensorflow.codelabs.objectdetection.fileprovider"
-42-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:28:13-87
-43            android:exported="false"
-43-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:29:13-37
-44            android:grantUriPermissions="true" >
-44-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:30:13-47
-45            <meta-data
-45-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:31:13-33:54
-46                android:name="android.support.FILE_PROVIDER_PATHS"
-46-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:32:17-67
-47                android:resource="@xml/file_paths" />
-47-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:33:17-51
-48        </provider>
-49    </application>
-50
-51</manifest>
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:5:5-66
+11-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:5:22-64
+12
+13    <queries>
+13-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:7:5-11:15
+14        <intent>
+14-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:8:9-10:18
+15            <action android:name="android.media.action.IMAGE_CAPTURE" />
+15-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:9:13-73
+15-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:9:21-70
+16        </intent>
+17    </queries>
+18
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+22
+23    <application
+23-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:13:5-37:19
+24        android:allowBackup="true"
+24-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:14:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.3.2] /home/naveed/.gradle/caches/transforms-2/files-2.1/f4726924add2327517ec5f23b6aa3aba/core-1.3.2/AndroidManifest.xml:24:18-86
+26        android:debuggable="true"
+27        android:extractNativeLibs="false"
+28        android:icon="@mipmap/ic_launcher"
+28-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:15:9-43
+29        android:label="@string/app_name"
+29-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:16:9-41
+30        android:roundIcon="@mipmap/ic_launcher_round"
+30-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:17:9-54
+31        android:supportsRtl="true"
+31-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:18:9-35
+32        android:testOnly="true"
+33        android:theme="@style/Theme.ObjectDetection" >
+33-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:19:9-53
+34        <activity android:name="org.tensorflow.codelabs.objectdetection.MainActivity" >
+34-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:20:9-26:20
+34-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:20:19-86
+35            <intent-filter>
+35-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:21:13-25:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:22:17-69
+36-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:22:25-66
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:24:17-77
+38-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:24:27-74
+39            </intent-filter>
+40        </activity>
+41
+42        <provider
+42-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:28:9-36:20
+43            android:name="androidx.core.content.FileProvider"
+43-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:29:13-62
+44            android:authorities="org.tensorflow.codelabs.objectdetection.fileprovider"
+44-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:30:13-87
+45            android:exported="false"
+45-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:31:13-37
+46            android:grantUriPermissions="true" >
+46-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:32:13-47
+47            <meta-data
+47-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:33:13-35:54
+48                android:name="android.support.FILE_PROVIDER_PATHS"
+48-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:34:17-67
+49                android:resource="@xml/file_paths" />
+49-->/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/AndroidManifest.xml:35:17-51
+50        </provider>
+51    </application>
+52
+53</manifest>

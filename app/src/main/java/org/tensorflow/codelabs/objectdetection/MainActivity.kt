@@ -23,9 +23,11 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -59,6 +61,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgSampleThree: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
+
+    private lateinit var webView: WebView
+    private val URL = "https://doubtfulcoder.github.io/chess-fen/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,7 +131,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .build()
         val detector = ObjectDetector.createFromFileAndOptions(
                 this,
-                "android.tflite",
+                "pieces.tflite",
                 options
         )
 
@@ -142,11 +147,54 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             // Create a data object to display the detection result
             DetectionResult(it.boundingBox, text)
         }
+        debugPrint(results)
+
+        val detector2 = ObjectDetector.createFromFileAndOptions(
+            this,
+            "board.tflite",
+            options
+        )
+        // Step 3: Feed given image to the detector
+        val results2 = detector2.detect(image)
+        val resultToDisplay2 = results2.map {
+            // Get the top-1 category and craft the display text
+            val category = it.categories.first()
+            val text = "${category.label}, ${category.score.times(100).toInt()}%"
+
+            // Create a data object to display the detection result
+            DetectionResult(it.boundingBox, text)
+        }
+        val finalResult = resultToDisplay + resultToDisplay2
+//        finalResult
+//        finalResult.addAll(resultToDisplay)
+//        finalResult.addAll(resultToDisplay2)
+
+        debugPrint(results2)
+
+        val fenPos = convertToFen(results2, results)
+
+        // Step 4: Parse the detection result and show it
+//        val resultToDisplay2 = results.map {
+//            // Get the top-1 category and craft the display text
+//            val category = it.categories.first()
+//            val text = "${category.label}, ${category.score.times(100).toInt()}%"
+//
+//            // Create a data object to display the detection result
+//            DetectionResult(it.boundingBox, text)
+//        }
+
         // Draw the detection result on the bitmap and show it.
-        val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
+        val imgWithResult = drawDetectionResult(bitmap, finalResult)
         runOnUiThread {
             inputImageView.setImageBitmap(imgWithResult)
         }
+
+        // Loads up the board with the FEN
+//        val handler = Handler()
+//        handler.postDelayed({
+//            loadPos(fenPos)
+//        }, 10000) // Waits 10 seconds before loading
+        loadPos(fenPos)
     }
 
     /**
@@ -164,6 +212,140 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "    Label $j: ${category.label}")
                 val confidence: Int = category.score.times(100).toInt()
                 Log.d(TAG, "    Confidence: ${confidence}%")
+            }
+        }
+    }
+
+    /**
+     * convertToFen(pieces: List<Detection>)
+     *      Converts piece detection to Chess FEN format
+     */
+    private fun convertToFen(
+        board : List<Detection>, pieces : List<Detection>
+    ): String  {
+        val fenBoard = Array(8) {
+            arrayOfNulls<String>(
+                8
+            )
+        }
+        // Variables for board
+        var boardLeft: Float = 0.0F
+        var boardRight: Float = 0.0F
+        var boardTop: Float = 0.0F
+        var boardBottom: Float = 0.0F
+        var leftRightDiff: Float = 0.0F
+        var bottomTopDiff: Float = 0.0F
+
+        for ((i, obj) in board.withIndex()) {
+            val box = obj.boundingBox
+            boardLeft = box.left
+            boardRight = box.right
+            boardTop = box.top
+            boardBottom = box.bottom
+            leftRightDiff = boardRight - boardLeft
+            bottomTopDiff = boardTop - boardBottom
+        }
+
+        for ((i, obj) in pieces.withIndex()) {
+            val box = obj.boundingBox
+            val pieceX = (box.left + box.right) / 2
+            val pieceY = (box.top + box.bottom) / 2
+            val boardI = 8-(Math.round((pieceY - boardBottom) / (bottomTopDiff / 8))-1)
+            val boardJ = Math.round((pieceX - boardLeft) / (leftRightDiff / 8))-1
+            Log.d(TAG, "boardI: $boardI")
+            Log.d(TAG, "boardJ: $boardJ")
+
+            for ((j, category) in obj.categories.withIndex()) {
+                Log.d(TAG, "    Label $j: ${category.label}")
+                fenBoard[boardI][boardJ] = getPieceFenCode(category.label)
+                Log.d(TAG, "label: ${getPieceFenCode(category.label)}")
+                Log.d(TAG, "boardJ: ${category.label}")
+//                val confidence: Int = category.score.times(100).toInt()
+//                Log.d(TAG, "    Confidence: ${confidence}%")
+            }
+        }
+
+        Log.d(TAG, "${boardToString(fenBoard)}")
+        return boardToString(fenBoard)
+    }
+
+    /**
+     * getPieceFenCode(label: String)
+     *      Gets FEN code of a piece (e.g. r for black rook)
+     */
+    private fun getPieceFenCode(label: String): String {
+        Log.d(TAG, "label value: $label")
+        var fenCode = ""
+        // Gets fen code based on standard chess notation
+        if (label.endsWith("King")) {
+            fenCode = "k"
+        }
+        else if (label.endsWith("Queen")) {
+            fenCode = "q"
+        }
+        else if (label.endsWith("Rook")) {
+            fenCode = "r"
+        }
+        else if (label.endsWith("Bishop")) {
+            fenCode = "b"
+        }
+        else if (label.endsWith("Knight")) {
+            fenCode = "n"
+        }
+        else if (label.endsWith("Pawn")) {
+            fenCode = "p"
+        }
+        // Capitalizes white pieces
+        if (label.startsWith("White")) {
+            fenCode = fenCode.toLowerCase()
+        }
+        Log.d(TAG, "fenCode: $fenCode")
+        return fenCode
+    }
+
+    /**
+     * boardToString(board: Array<Array<String?>>)
+     *      Converts FEN board array to an FEN string
+     */
+    private fun boardToString(board: Array<Array<String?>>): String {
+        var fenString = ""
+        for (row in board) {
+            var blankSquareCount = 0 // keeps track of blank squares
+            for (value in row) {
+                if (value == null) { // blank square
+                    blankSquareCount++
+                }
+                else { // actual piece
+                    if (blankSquareCount != 0) {
+                        fenString += blankSquareCount
+                        blankSquareCount = 0
+                    }
+                    fenString += value
+                }
+            }
+            // Adds trailing blanksquares
+            if (blankSquareCount != 0) { fenString += blankSquareCount }
+            fenString += "/" // Row seperator
+        }
+        // Removes trailing slash
+        fenString = fenString.substring(0, fenString.length-1)
+        return fenString
+    }
+
+    /**
+     * loadPos(fen: string)
+     *      Loads up a chess board with FEN using WebVew
+     */
+    private fun loadPos(fen: String) {
+        runOnUiThread {
+            webView = findViewById(R.id.web);
+            webView.visibility = View.VISIBLE
+            //        webView.webViewClient = WebViewClient()
+
+            webView.apply {
+                loadUrl("$URL?$fen")
+                settings.javaScriptEnabled = true
+                //            settings.safeBrowsingEnabled = true
             }
         }
     }

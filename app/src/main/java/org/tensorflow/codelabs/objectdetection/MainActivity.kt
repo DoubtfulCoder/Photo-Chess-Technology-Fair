@@ -1,19 +1,3 @@
-/**
- * Copyright 2021 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.tensorflow.codelabs.objectdetection
 
 import android.app.Activity
@@ -62,6 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
 
+    // Webview
     private lateinit var webView: WebView
     private val URL = "https://doubtfulcoder.github.io/chess-fen/"
 
@@ -76,6 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleThree = findViewById(R.id.imgSampleThree)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
+        // Click listeners
         captureImageFab.setOnClickListener(this)
         imgSampleOne.setOnClickListener(this)
         imgSampleTwo.setOnClickListener(this)
@@ -93,7 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * onClick(v: View?)
-     *      Detect touches on the UI components
+     *      Detect touches on components
      */
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -118,62 +104,64 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * runObjectDetection(bitmap: Bitmap)
-     *      TFLite Object Detection function
+     *      Object Detection function
      */
     private fun runObjectDetection(bitmap: Bitmap) {
-        // Step 1: Create TFLite's TensorImage object
+        // Create TFLite's TensorImage object
         val image = TensorImage.fromBitmap(bitmap)
 
-        // Step 2: Initialize the detector object
+        // Initialize detector object
         val options = ObjectDetector.ObjectDetectorOptions.builder()
                 .setMaxResults(5)
                 .setScoreThreshold(0.3f)
                 .build()
+
+        // First detector for pieces
         val detector = ObjectDetector.createFromFileAndOptions(
                 this,
                 "pieces.tflite",
                 options
         )
 
-        // Step 3: Feed given image to the detector
+        // Feed given image to the detector
         val results = detector.detect(image)
 
-        // Step 4: Parse the detection result and show it
+        // Parses detection
         val resultToDisplay = results.map {
             // Get the top-1 category and craft the display text
             val category = it.categories.first()
             val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
-            // Create a data object to display the detection result
+            // Creates a data object to display result
             DetectionResult(it.boundingBox, text)
         }
         debugPrint(results)
 
+        // detector2 for detecting board
         val detector2 = ObjectDetector.createFromFileAndOptions(
             this,
             "board.tflite",
             options
         )
-        // Step 3: Feed given image to the detector
+        // Feeds image to detector
         val results2 = detector2.detect(image)
         val resultToDisplay2 = results2.map {
             // Get the top-1 category and craft the display text
             val category = it.categories.first()
             val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
-            // Create a data object to display the detection result
+            // Creates data object to display result
             DetectionResult(it.boundingBox, text)
         }
+        // Combines two results into one list
         val finalResult = resultToDisplay + resultToDisplay2
-//        finalResult
-//        finalResult.addAll(resultToDisplay)
-//        finalResult.addAll(resultToDisplay2)
 
         debugPrint(results2)
 
+        // Converts to FEN
         val fenPos = convertToFen(results2, results)
 
-        // Step 4: Parse the detection result and show it
+        // Parse the detection result and show it
 //        val resultToDisplay2 = results.map {
 //            // Get the top-1 category and craft the display text
 //            val category = it.categories.first()
@@ -297,7 +285,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         // Capitalizes white pieces
         if (label.startsWith("White")) {
-            fenCode = fenCode.toLowerCase()
+            fenCode = fenCode.toUpperCase()
         }
         Log.d(TAG, "fenCode: $fenCode")
         return fenCode
@@ -339,13 +327,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun loadPos(fen: String) {
         runOnUiThread {
             webView = findViewById(R.id.web);
-            webView.visibility = View.VISIBLE
-            //        webView.webViewClient = WebViewClient()
+            webView.visibility = View.VISIBLE // shows view
 
             webView.apply {
                 loadUrl("$URL?$fen")
-                settings.javaScriptEnabled = true
-                //            settings.safeBrowsingEnabled = true
+                settings.javaScriptEnabled = true // allows JavaScript
             }
         }
     }

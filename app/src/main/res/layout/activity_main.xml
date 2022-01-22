@@ -20,15 +20,6 @@
             android:textAlignment="center"
             android:textSize="40sp" />
 
-        <TextView
-            android:id="@+id/random_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hello"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:visibility="invisible" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"

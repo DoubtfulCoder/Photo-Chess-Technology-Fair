@@ -36,6 +36,10 @@
         "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
+        "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/drawable_old2.jpg.flat",
+        "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/drawable/old2.jpg"
+    },
+    {
         "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
@@ -58,6 +62,10 @@
     {
         "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/drawable_old3.jpg.flat",
+        "source": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/src/main/res/drawable/old3.jpg"
     },
     {
         "merged": "/home/naveed/Desktop/odml-pathways-main/object-detection/codelab2/android/final/app/build/intermediates/res/merged/debug/xml_file_paths.xml.flat",
